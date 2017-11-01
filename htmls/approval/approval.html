@@ -1,0 +1,85 @@
+<!-- <div>
+	<div ui-view></div>
+</div> -->
+
+<!-- <div class="header"><p class="headerTex">My Invoices <span class="icon-Magni tex20 whiteTex"></span></p></div> -->
+<div ui-view="approvalHeader"></div>
+<section>
+    <div class="lt1">
+    <!-- <div id="search" class="row greyLbackground padd510" ng-show="isSearchFilterOpen"> -->
+    <div id="search1" class="row greyLbackground padd510" ng-show="isSearchFilterOpen">
+        <div class="fullDiv">
+        	<div class="col-xs-12 padd5">
+             <label>Vendor</label>
+            <select class="recieverSelect margB0" tabindex="1" autofocus ng-model="filterby.byVendor" name="vendor">
+                    <option value=''>Select Vendor</option>
+                     <option  ng-repeat="vendor in vendorList" value='{{vendor}}'>{{vendor}}</option>
+        		</select>
+            </div>
+           <!--  <div class="col-xs-6 padd5">
+            <select class="recieverSelect" tabindex="1" autofocus autofocus ng-model="filterby.status" name="status">
+                     <option value=''>Select Status</option>
+                     <option  ng-repeat="status in filterby.statusList track by $index" value='{{status}}'>{{status}}</option> 
+        		</select>
+            </div> -->
+        </div> 
+        <div class="fullDiv paddT5">
+        	<!-- <div class="col-xs-6 padd5"><input id="fromDate" type="text" class="datefield" placeholder="Due Date: From"/></div>
+            <div class="col-xs-6 padd5"><input id="toDate" type="text" class="datefield" placeholder="Due Date: To"/></div> -->
+            
+            <div class="col-xs-6 padd5">
+            	 <label>Invoice Date: From</label>
+	            <input ng-if="!isMobileDevice()" id="fromDate" type="text" class="datefield margB0" name="fromDate" ng-model="filterby.fromDate" date-format="MM/dd/yyyy" bs-datepicker data-autoclose="1" required  data-max-date="{{today}}" ng-keydown="preventKeyBoardInput($event)" ng-keypress="preventKeyBoardInput($event)" ng-change="invoiceDateChange()" ng-cut="$event.preventDefault()" ng-copy="$event.preventDefault()" ng-paste="$event.preventDefault()" />
+	            <!-- <div ng-if="isMobileDevice()" ng-click="getDate('DD/MM/YYYY','fromDate')" > -->
+							<div  ng-if="isMobileDevice()" ng-click="getDate('DD/MM/YYYY','fromDate')" class="datefield" id="fromDate" name="fromDate">{{filterby.fromDate | date:'MM/dd/yyyy'}}</div>
+				<!-- </div> -->
+			</div>
+			
+			<div class="col-xs-6 padd5">
+	             <label>Invoice Date: To</label>
+	            <input ng-if="!isMobileDevice()" id="toDate" type="text" class="datefield margB0"  name="toDate" ng-model="filterby.toDate" date-format="MM/dd/yyyy" bs-datepicker data-autoclose="1" required  data-min-date="{{filterby.fromDate}}" data-max-date="{{today}}" ng-keydown="preventKeyBoardInput($event)" ng-keypress="preventKeyBoardInput($event)" ng-change="invoiceDateChange()" ng-cut="$event.preventDefault()" ng-copy="$event.preventDefault()" ng-paste="$event.preventDefault()" />
+	            <!-- <div ng-if="isMobileDevice()" ng-click="getDate('DD/MM/YYYY','toDate')" > -->
+							<div ng-if="isMobileDevice()" ng-click="getDate('DD/MM/YYYY','toDate')" class="datefield" id="toDate" name="toDate">{{filterby.toDate | date:'MM/dd/yyyy'}}</div>
+				<!-- </div> -->
+			</div>
+            
+        </div>
+        <div class="fullDiv paddT5">
+        	<div class="col-xs-6 padd5">
+                     <label>Amount: Min.</label><br/>
+                   <input type="number" name="minAmount" ng-model="filterby.minAmount" class="amtfield margB0"  />
+            </div>
+            <div class="col-xs-6 padd5">
+                 <label>Amount: Max.</label><br/>
+                  <input type="number" name="maxAmount" ng-model="filterby.maxAmount" class="amtfield margB0" />
+            </div>
+        </div>
+        <div class="fullDiv text-right padd5 paddT10">
+          <p class="text-center errorText tex13">{{errMessage}}</p>
+        	<button type="button" class="btn-cancel img-rounded tex13" ng-click="clearFilter()">Clear</button>
+          <button type="button" class="btn-green img-rounded tex13" ng-click="applyFilter()">Apply</button>
+        </div>
+    </div>
+   <!--  <div class="row no-background padd510">
+        <div class="borderround" style="float:left">
+               <a ng-class="{actionActive:isSelected('init.approval.invoicePending'),action:!isSelected('init.approval.invoicePending')}" style="float:left" href="#/approval/invoicePending">Action</a>
+               <a ng-class="{actionActive:isSelected('init.approval.invoiceCompleted'),action:!isSelected('init.approval.invoiceCompleted')}" style="float:left" href="#/approval/invoiceCompleted">Activity</a>
+         </div>
+    </div> -->
+
+   <div ui-view="approval"></div>
+ 
+ </div>
+ 
+ <div ui-view="approvalFooter"></div>
+  
+</section>
+
+<script>
+    jQuery(document).ready(function($) {
+       /*  $( "#fromDate" ).datepicker();
+		$( "#toDate" ).datepicker(); */
+		
+	 });
+</script>
+
